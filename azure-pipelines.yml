@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  name: sc-tsa-dev
 
 steps:
 - task: NodeTool@0
