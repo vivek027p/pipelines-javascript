@@ -22,7 +22,7 @@ steps:
   displayName: 'npm install and build'
   
 - task: Docker@2
-    displayName: Build and Push image
+    displayName: 'Build and Push image'
     inputs:
 #     containerRegistry: 'JFrog Artifactory Test'
       repository: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/$(imageName)'
