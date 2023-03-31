@@ -21,12 +21,7 @@ steps:
     npm test
   displayName: 'npm install and build'
   
-# stages:
-- stage: Build
-  displayName: Build
-
-  steps:
-  - task: Docker@2
+- task: Docker@2
     displayName: Build and Push image
     inputs:
 #     containerRegistry: 'JFrog Artifactory Test'
