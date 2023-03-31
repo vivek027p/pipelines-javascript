@@ -22,14 +22,33 @@ steps:
   displayName: 'npm install and build'
   
 - task: Docker@2
-  displayName: 'Build and Push Image'
-  inputs:
-#    containerRegistry: 'JFrog Artifactory Test'
-    repository: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/$(imageName)'
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
-    tags: 'latest'
+      displayName: 'Build Docker Image'
+      inputs:
+#        containerRegistry: 'JFrog Artifactory Test'
+        repository: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/$(imageName)'
+        Dockerfile: '**/Dockerfile'
+        command: 'build'
+        tags: 'latest'
       
+- task: ArtifactoryDocker@1
+      displayName: 'Push Docker Image to Jfrog'
+      inputs:
+        command: 'push'
+        artifactoryService: 'JFrog Artifactory Test'
+        targetRepo: 'test-docker-azure'
+        imageName: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/pipelines-javascript-docker:latest'
+        collectBuildInfo: true
+        buildName: '$(Build.DefinitionName)'
+        buildNumber: '$(Build.BuildNumber)'
+
+
+- task: ArtifactoryPublishBuildInfo@1
+      displayName: 'Publish Artifact Build Info'
+      inputs:
+        artifactoryService: 'JFrog Artifactory Test'
+        buildName: '$(Build.DefinitionName)'
+        buildNumber: '$(Build.BuildNumber)'
+              
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
