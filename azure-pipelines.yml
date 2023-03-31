@@ -21,7 +21,7 @@ steps:
     npm test
   displayName: 'npm install and build'
   
-stages:
+# stages:
 - stage: Build
   displayName: Build
 
