@@ -35,7 +35,7 @@ steps:
   inputs:
     command: 'push'
     artifactoryService: 'JFrog Artifactory Test'
-    targetRepo: 'test-docker-azure'
+    #targetRepo: 'test-docker-azure'
     imageName: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/sampleimage:latest'
     collectBuildInfo: true
 
