@@ -25,7 +25,7 @@ steps:
   displayName: 'Build Docker Image'
   inputs:
     containerRegistry: 'Jfrog Docker registry'
-    repository: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/$(imageName)'
+    repository: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/sampleimage'
     Dockerfile: '**/Dockerfile'
     command: 'build'
     tags: 'latest'
@@ -36,19 +36,15 @@ steps:
     command: 'push'
     artifactoryService: 'JFrog Artifactory Test'
     targetRepo: 'test-docker-azure'
-    imageName: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/pipelines-javascript-docker:latest'
+    imageName: 'docker-stg.artifactory.global.standardchartered.com/test-docker-azure/sampleimage:latest'
     collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
 
 
 - task: ArtifactoryPublishBuildInfo@1
   displayName: 'Publish Artifact Build Info'
   inputs:
     artifactoryService: 'JFrog Artifactory Test'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-
+  
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
